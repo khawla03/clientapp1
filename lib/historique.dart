@@ -961,37 +961,233 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
             SizedBox(
               height: 5,
             ),
-            Card(
+           Card(
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8, bottom: 5),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
+             child:
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Container(
+                height: 45,
+                width: 130,
+                decoration: BoxDecoration(
+                    color: Color(0xFF9E9E9E),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                child: TextButton(
+                  
+                          onPressed: () => {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => evaluation())),
+                          },
+                          child: const Text(
+                            'Evaluer',
+                            style: TextStyle(color: Colors.black, fontSize: 16),
+                          ),
+                          
+                        ),
+                        ),
+                     
+                  
+                 
+            
+                        SizedBox(
+                width: 20,
+              ),
+              Container(
+                height: 45,
+                width: 130,
+                decoration: BoxDecoration(
+                    color: Color(0xFF673695),
+                    borderRadius: BorderRadius.all(Radius.circular(5))),
+                // ignore: deprecated_member_use
+                child: FlatButton(
+                  onPressed: () {
+                  
+                  },
+                  child: const Text(
+                    "Demande",
+                    style: TextStyle(color: Colors.white, fontSize: 16),
+                  ),
+                ),
+              ),
+                ],
+                    ),
+                    ), )
+          ]),
+    );
+  }
+}
+class evaluation extends StatefulWidget {
+  const evaluation ({Key? key}) : super(key: key);
+
+  @override
+  _EvaState createState() => _EvaState();
+}
+
+class _EvaState extends State<evaluation> {
+  double rating1=1;
+  double rating2=0;
+  double rating3=0;
+@override
+  Widget build(BuildContext context) {
+    return 
+    Scaffold(
+appBar: AppBar(
+        backgroundColor: Color(0xFF673695),
+        leading:
+        // ignore: deprecated_member_use
+        FlatButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => Historique()));
+          },
+          child: const Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title:
+        Text(
+          'Commande #546767',
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Colors.white,
+            fontSize: 16,
+            fontFamily: 'verdana',
+            overflow: TextOverflow.ellipsis,
+          ),
+        ),
+        automaticallyImplyLeading: false,), 
+ body:   ListView(
+      children: [
+        
+        Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+        Text(' Evaluer votre éxperience',
+                        textAlign:TextAlign.left,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          color: Color(0xFF673695),
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                          fontFamily: 'verdana',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),),
+          SizedBox(height: 10,),
+        Card(
+              color: Colors.white,
+             child: Padding(
+              padding: const EdgeInsets.all(8.0),
+                child:
+        Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      Text(
-                        'Noter la qualité de notre service',
+Text( 'Saisfait de notre service?',
+                        textAlign:TextAlign.left,
                         style: TextStyle(
                           decoration: TextDecoration.none,
                           color: Colors.black,
                           fontSize: 18,
-                          fontWeight: FontWeight.bold,
                           fontFamily: 'verdana',
                           overflow: TextOverflow.ellipsis,
                         ),
                       ),
                       SizedBox(height: 3,),
                       StarRating(
-                        rating: rating,
+                        rating: rating1,
                         onRatingChanged: (rating) =>
-                            setState(() => this.rating = rating),
+                            setState(() => rating1 = rating),
                       ),
-                      SizedBox(height: 10),
-                    ]),
+              SizedBox(height: 10,),
+Text('Comment était notre livreur?',
+                        textAlign:TextAlign.left,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'verdana',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      SizedBox(height: 3,),
+                      StarRating(
+                        rating: rating2,
+                        onRatingChanged: (rating) =>
+                            setState(() => rating2 = rating),
+                      ),
+      SizedBox(height: 10,),
+
+        
+                 Text(
+                        'Comment était le produit?',
+                        textAlign:TextAlign.left,
+                        style: TextStyle(
+                          decoration: TextDecoration.none,
+                          color: Colors.black,
+                          fontSize: 18,
+                          fontFamily: 'verdana',
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      SizedBox(height: 3,),
+                      StarRating(
+                        rating: rating3,
+                        onRatingChanged: (rating) =>
+                            setState(() => this.rating3 = rating),
+                      ),
+
+                      SizedBox(height: 10),]),),),
+                     SizedBox(height: 10), 
+
+                   Card(
+              color: Colors.white,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child:
+               TextField(keyboardType: TextInputType.multiline,
+  maxLines: 3,
+            decoration: InputDecoration(
+
+              hintText: ' Vous avez quelque chose à rajouter?',
+              focusedBorder: UnderlineInputBorder(
+                borderSide: BorderSide(color: Color(0xFF673695)),
               ),
-              color: Colors.white70,
-            )
+              enabledBorder: 
+              UnderlineInputBorder(
+                borderSide: BorderSide(
+                  color: Color(0xFF673695),
+                ),
+              ),
+            ),
+          )),),
+          FlatButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (_) => evaluation()));
+                    },
+                    child: Text(
+                      'Vous avez une réclamation?',
+                      style: TextStyle(color: Colors.blue, fontSize: 15),
+                    ),
+                  )
           ]),
+
+      bottomNavigationBar: Container(
+        color: const Color(0xFF673695),
+        child: TextButton(
+          onPressed: () {
+            /*Navigator.push( context, MaterialPageRoute(builder: (_) => ChangePassword()));*/
+          }, //changer le mot de passe
+          child: const Text(
+            'SOUMETTRE',
+            style: TextStyle(color: Colors.white, fontSize: 20),
+          ),
+        ),
+       ),
+        
+     
     );
-  }
+     }
 }
 
