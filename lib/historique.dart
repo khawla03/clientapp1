@@ -1003,7 +1003,8 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
                 // ignore: deprecated_member_use
                 child: FlatButton(
                   onPressed: () {
-                  
+                  Navigator.push(context,
+                                MaterialPageRoute(builder: (_) => Demande())),
                   },
                   child: const Text(
                     "Demande",
@@ -1177,7 +1178,7 @@ Text('Comment était notre livreur?',
         color: const Color(0xFF673695),
         child: TextButton(
           onPressed: () {
-            /*Navigator.push( context, MaterialPageRoute(builder: (_) => ChangePassword()));*/
+            Navigator.push( context, MaterialPageRoute(builder: (_) => Reclamation()));
           }, //changer le mot de passe
           child: const Text(
             'SOUMETTRE',
