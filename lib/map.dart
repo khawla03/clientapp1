@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:geolocator/geolocator.dart';
 import 'localisation.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 
 class MapSample extends StatefulWidget {
@@ -11,13 +12,37 @@ class MapSample extends StatefulWidget {
 }
 
 class MapSampleState extends State<MapSample> {
+  final _texte_controller = TextEditingController();
+  String curpos ='votre location' ;
+  List<Marker> myMarker = [];
+  _handletap(LatLng tappos){
+    print(".........................");
+    print(tappos);
+   setState((){
+
+     myMarker =[];
+     myMarker.add(
+       Marker(
+       markerId: MarkerId(tappos.toString()),
+       position: tappos,
+       ));
+       lat=tappos.latitude;
+       long=tappos.longitude;
+       curpos  = _getLocationAddress(lat ,long) as String;
+
+   });
+  }
+
   void show_location() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
     setState(() {
       long = position.longitude;
       lat = position.latitude;
+      curpos  = _getLocationAddress(lat ,long) as String;
+
     });
+
   }
 
   double long = 3.05997, lat = 36.7762;
@@ -58,22 +83,29 @@ class MapSampleState extends State<MapSample> {
     _determinePosition();
     super.initState();
 
-    ///whatever you want to run on page build
   }
 
   final Completer<GoogleMapController> _controller = Completer();
 
-  static const CameraPosition _kGooglePlex = CameraPosition(
+  static const CameraPosition _posinit = CameraPosition(
     target: LatLng(36.7762, 3.05997),
     zoom: 14.4746,
   );
   String dropdownValue = 'Domicile';
   IconData typeIcon= Icons.home ;
+
   @override
   Widget build(BuildContext context) {
+    show_location();
+
+    final CameraPosition _kpos = CameraPosition(
+        bearing: 192.8334901395799,
+        target: LatLng( lat, long),
+        tilt: 59.440717697143555,
+        zoom: 17.0);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color(0xFF673695),
+        backgroundColor: const Color(0xFF673695),
         leading:
         // ignore: deprecated_member_use
         FlatButton(
@@ -98,24 +130,26 @@ class MapSampleState extends State<MapSample> {
             GoogleMap(
               mapType: MapType.normal,
               zoomControlsEnabled: false,
-              initialCameraPosition: _kGooglePlex,
+              initialCameraPosition: _kpos,
+              markers: Set.from(myMarker),
+              onTap: _handletap,
               onMapCreated: (GoogleMapController controller) {
                 _controller.complete(controller);
               },
             ),
             Column(
               children:  [
-                const TextField(
+                TextField(
                   decoration: InputDecoration(
                     icon: Icon(Icons.push_pin),
                     filled: true,
                     fillColor: Colors.white54,
-                    //hintText: 'votre location',
-                    labelText: 'votre location',
-                    focusedBorder: UnderlineInputBorder(
+                    hintText: curpos,
+                    labelText: curpos,
+                    focusedBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(color: Color(0xFF673695)),
                     ),
-                    enabledBorder: UnderlineInputBorder(
+                    enabledBorder: const UnderlineInputBorder(
                       borderSide: BorderSide(
                         color: Color(0xFF673695),
                       ),
@@ -128,7 +162,7 @@ class MapSampleState extends State<MapSample> {
 
                 Row(
                   children: [
-                    Icon(Icons.filter_alt,
+                    const Icon(Icons.filter_alt,
                     color: Colors.black45
                     ),
                     SizedBox(width: 15,),
@@ -141,7 +175,6 @@ class MapSampleState extends State<MapSample> {
                           children: [
                             DropdownButton<String>(
                             value: dropdownValue,
-
                             icon: Icon(typeIcon),
                             iconSize: 24,
                             elevation: 16,
@@ -211,13 +244,35 @@ class MapSampleState extends State<MapSample> {
 
   Future<void> _findMyPosition() async {
     show_location();
-
     final CameraPosition _kpos = CameraPosition(
         bearing: 192.8334901395799,
-        target: LatLng(await lat,await long),
+        target: LatLng( lat, long),
         tilt: 59.440717697143555,
         zoom: 17.0);
     final GoogleMapController controller = await _controller.future;
     controller.animateCamera(CameraUpdate.newCameraPosition(_kpos));
   }
+  //final Geolocator _geolocator = Geolocator();
+  //Position? _currentPosition  ;
+  late String _isoCountryCode ;
+  Future<String> _getLocationAddress(double latitude, double longitude) async {
+    List<Placemark> newPlace =
+    await placemarkFromCoordinates(latitude, longitude);
+    Placemark placeMark = newPlace[0];
+    String name = placeMark.name as String;
+    // String subLocality = placeMark.subLocality;
+    String locality = placeMark.locality as String;
+    String administrativeArea = placeMark.administrativeArea as String;
+    String subAdministrativeArea = placeMark.administrativeArea as String;
+    String postalCode = placeMark.postalCode as String;
+    String country = placeMark.country as String;
+    // String subThoroughfare = placeMark.subThoroughfare;
+    String thoroughfare = placeMark.thoroughfare as String;
+    _isoCountryCode = placeMark.isoCountryCode as String;
+    curpos="$name, $thoroughfare, $locality, $administrativeArea, $postalCode, $country";
+    print("------------------$curpos------------------------------ \n ");
+    return "$name, $thoroughfare, $locality, $administrativeArea, $postalCode, $country";
+  }
 }
+
+

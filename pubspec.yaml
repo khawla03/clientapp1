@@ -26,6 +26,9 @@ dev_dependencies:
   http: ^0.13.3
   intl: ^0.17.0
   flutter_phone_direct_caller: ^2.0.0
+  google_api_headers: ^1.1.1
+  geocoding: ^2.0.1
+  pedantic: ^1.11.1
 
 
 flutter:
