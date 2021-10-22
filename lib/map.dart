@@ -96,7 +96,7 @@ class MapSampleState extends State<MapSample> {
 
   @override
   Widget build(BuildContext context) {
-    show_location();
+
 
     final CameraPosition _kpos = CameraPosition(
         bearing: 192.8334901395799,
@@ -236,14 +236,15 @@ class MapSampleState extends State<MapSample> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
       floatingActionButton: FloatingActionButton(
-        onPressed: _findMyPosition,
+        onPressed:
+        _findMyPosition,
         child: Icon(Icons.location_searching_outlined),
       ),
     );
   }
 
   Future<void> _findMyPosition() async {
-    show_location();
+     show_location();
     final CameraPosition _kpos = CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng( lat, long),
