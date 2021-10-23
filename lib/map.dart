@@ -6,6 +6,8 @@ import 'localisation.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:flutter_google_places/flutter_google_places.dart';
 
+
+TextEditingController textfield_controller =TextEditingController();
 class MapSample extends StatefulWidget {
   @override
   State<MapSample> createState() => MapSampleState();
@@ -15,12 +17,21 @@ class MapSampleState extends State<MapSample> {
   final _texte_controller = TextEditingController();
   String curpos ='votre location' ;
   List<Marker> myMarker = [];
-  _handletap(LatLng tappos){
+  _handletap(LatLng tappos) async{
     print(".........................");
     print(tappos);
-   setState((){
+    myMarker =[];
+    myMarker.add(
+        Marker(
+          markerId: MarkerId(tappos.toString()),
+          position: tappos,
+        ));
+    lat=tappos.latitude;
+    long=tappos.longitude;
+    curpos  = await _getLocationAddress(lat ,long) as String;
+    setState((){
 
-     myMarker =[];
+      /*myMarker =[];
      myMarker.add(
        Marker(
        markerId: MarkerId(tappos.toString()),
@@ -28,19 +39,19 @@ class MapSampleState extends State<MapSample> {
        ));
        lat=tappos.latitude;
        long=tappos.longitude;
-       curpos  = _getLocationAddress(lat ,long) as String;
-
-   });
+       curpos  =  _getLocationAddress(lat ,long) as String;*/
+      textfield_controller.text=curpos;
+    });
   }
 
   void show_location() async {
     Position position = await Geolocator.getCurrentPosition(
         desiredAccuracy: LocationAccuracy.high);
+    long = position.longitude;
+    lat = position.latitude;
+    curpos  = await _getLocationAddress(lat ,long) as String;
     setState(() {
-      long = position.longitude;
-      lat = position.latitude;
-      curpos  = _getLocationAddress(lat ,long) as String;
-
+      textfield_controller.text=curpos;
     });
 
   }
@@ -140,6 +151,7 @@ class MapSampleState extends State<MapSample> {
             Column(
               children:  [
                 TextField(
+                  controller: textfield_controller,
                   decoration: InputDecoration(
                     icon: Icon(Icons.push_pin),
                     filled: true,
@@ -163,17 +175,17 @@ class MapSampleState extends State<MapSample> {
                 Row(
                   children: [
                     const Icon(Icons.filter_alt,
-                    color: Colors.black45
+                        color: Colors.black45
                     ),
                     SizedBox(width: 15,),
                     Container(
-                        width: MediaQuery.of(context).size.width -40,
-                        color: Colors.white54,
-                        //padding: const EdgeInsets.only(bottom: 0, left: 35),
-                        //margin: const EdgeInsets.only(bottom: 0),
-                        child: Column(
-                          children: [
-                            DropdownButton<String>(
+                      width: MediaQuery.of(context).size.width -40,
+                      color: Colors.white54,
+                      //padding: const EdgeInsets.only(bottom: 0, left: 35),
+                      //margin: const EdgeInsets.only(bottom: 0),
+                      child: Column(
+                        children: [
+                          DropdownButton<String>(
                             value: dropdownValue,
                             icon: Icon(typeIcon),
                             iconSize: 24,
@@ -209,11 +221,11 @@ class MapSampleState extends State<MapSample> {
                                 child: Text('   $value'),
                               );
                             }).toList(),
+                          ),
+                          Container(height: 1,color: Color(0xFF673695),)
+                        ],
                       ),
-                            Container(height: 1,color: Color(0xFF673695),)
-                          ],
-                        ),
-              ),
+                    ),
                   ],
                 ),
               ],
@@ -244,7 +256,7 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _findMyPosition() async {
-     show_location();
+    show_location();
     final CameraPosition _kpos = CameraPosition(
         bearing: 192.8334901395799,
         target: LatLng( lat, long),
@@ -275,5 +287,3 @@ class MapSampleState extends State<MapSample> {
     return "$name, $thoroughfare, $locality, $administrativeArea, $postalCode, $country";
   }
 }
-
-
