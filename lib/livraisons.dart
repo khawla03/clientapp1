@@ -1,4 +1,6 @@
 // ignore_for_file: deprecated_member_use
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'Bienvenue.dart';
 import 'package:intl/intl.dart';
@@ -1272,7 +1274,19 @@ class _ReclamationState extends State<Reclamation> {
   }
 }
 
-class CmdAnnule extends StatelessWidget {
+class CmdAnnule extends StatefulWidget {
+
+  @override
+  _annulState createState() => _annulState();
+}
+class _annulState extends State<CmdAnnule> {
+  @override
+  void initState(){
+  super.initState();
+  Timer(Duration(seconds: 1),
+  ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Livraisons())));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -1316,7 +1330,19 @@ class CmdAnnule extends StatelessWidget {
   }
 }
 
-class RecAnnule extends StatelessWidget {
+class RecAnnule extends StatefulWidget {
+  @override
+  _recState createState() => _recState();
+  }
+  class _recState extends State<RecAnnule> {
+  @override
+  void initState(){
+  super.initState();
+  Timer(Duration(seconds: 1),
+  ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Livraisons())));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

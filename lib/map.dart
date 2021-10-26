@@ -31,15 +31,7 @@ class MapSampleState extends State<MapSample> {
     curpos  = await _getLocationAddress(lat ,long) as String;
     setState((){
 
-      /*myMarker =[];
-     myMarker.add(
-       Marker(
-       markerId: MarkerId(tappos.toString()),
-       position: tappos,
-       ));
-       lat=tappos.latitude;
-       long=tappos.longitude;
-       curpos  =  _getLocationAddress(lat ,long) as String;*/
+      /* curpos  =  _getLocationAddress(lat ,long) as String;*/
       textfield_controller.text=curpos;
     });
   }
@@ -238,7 +230,7 @@ class MapSampleState extends State<MapSample> {
         color: const Color(0xFF673695),
         child: TextButton(
           onPressed: () {
-            /*Navigator.push( context, MaterialPageRoute(builder: (_) => ChangePassword()));*/
+            Navigator.push( context, MaterialPageRoute(builder: (_) => Localisation()));
           }, //changer le mot de passe
           child: const Text(
             'ajouter l’addresse',
@@ -256,6 +248,7 @@ class MapSampleState extends State<MapSample> {
   }
 
   Future<void> _findMyPosition() async {
+    show_location();
     show_location();
     final CameraPosition _kpos = CameraPosition(
         bearing: 192.8334901395799,

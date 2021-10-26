@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:appv1/historique.dart';
 import 'package:flutter/material.dart';
 import 'bienvenue.dart';
 
@@ -154,7 +157,7 @@ class _DemandeState extends State<Demande> {
         color: const Color(0xFF673695),
         child: TextButton(
           onPressed: () {
-            /*Navigator.push( context, MaterialPageRoute(builder: (_) => ChangePassword()));*/
+            Navigator.push( context, MaterialPageRoute(builder: (_) => DemandeEnvoyee()));
           }, //changer le mot de passe
           child: const Text(
             'SOUMETTRE',
@@ -165,3 +168,60 @@ class _DemandeState extends State<Demande> {
     );
   }
 }
+class DemandeEnvoyee extends StatefulWidget {
+  @override
+  _dmdState createState() => _dmdState();
+}
+class _dmdState extends State<DemandeEnvoyee> {
+  @override
+  void initState(){
+    super.initState();
+    Timer(Duration(seconds: 5),
+            ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>DetailEffect())));
+  }
+
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF673695),
+        leading:
+        // ignore: deprecated_member_use
+        FlatButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => Historique()));
+          },
+          child: const Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title: Text(
+          'Demande',
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'verdana',
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(children: [
+          SizedBox(height: 60),
+          Image.asset('assets/check.png'), //checkk
+          Text(
+            "Demande envoyée",
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              color: Color(0xFF673695),
+              fontSize: 18,
+              fontFamily: 'verdana',
+            ),
+          ),
+        ]),
+      ),
+    );
+  }
+}
+

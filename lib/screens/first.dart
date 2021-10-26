@@ -30,7 +30,7 @@ class _FirstState extends State<FirstScreen> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Container(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: EdgeInsets.only(left:8.0),
                   child: Text(
                     'Bienvenu ! ',
                     style: TextStyle(
@@ -44,7 +44,7 @@ class _FirstState extends State<FirstScreen> {
                 ),
                 SizedBox( height: 10, ),
                 Container(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: EdgeInsets.only(left: 8.0),
                   child: Text(
                     'Un savoir faire',
                     style: TextStyle(
@@ -58,7 +58,7 @@ class _FirstState extends State<FirstScreen> {
                 ),
                 SizedBox( height: 10, ),
                 Container(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: EdgeInsets.only(left: 8.0),
                   child: Text(
                     'Une histoire',
                     style: TextStyle(

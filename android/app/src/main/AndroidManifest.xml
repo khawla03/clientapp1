@@ -2,7 +2,7 @@
     package="com.example.appv1">
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
    <application
-        android:label="appv1"
+        android:label="Easy Relay"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"
@@ -32,5 +32,6 @@
        <meta-data
            android:name="com.google.android.geo.API_KEY"
            android:value="AIzaSyBH7Mk8ISRq_A8jXUVWoRjhMejhao5ZlpY"/>
+
     </application>
 </manifest>

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'Bienvenue.dart';
 import 'package:flutter/material.dart';
 import 'drawer.dart';
@@ -221,7 +223,8 @@ class Profile extends StatelessWidget {
                           // ignore: deprecated_member_use
                           child: FlatButton(
                             onPressed: () {
-
+                              Navigator.push(
+                                  context, MaterialPageRoute(builder: (_) => PswrdChanged()));
                             }, //changer le mot de passe
                             child: const Text(
                               'Terminer',
@@ -369,6 +372,59 @@ class ModifyInfo extends StatelessWidget {
               ),
             ),
           )
+        ]),
+      ),
+    );
+  }
+}
+class PswrdChanged extends StatefulWidget {
+  @override
+  _pswdState createState() => _pswdState();
+}
+class _pswdState extends State<PswrdChanged> {
+  @override
+  void initState(){
+    super.initState();
+    Timer(Duration(seconds: 1),
+    ()=>Navigator.pushReplacement(context, MaterialPageRoute(builder: (context)=>Profile())));
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Color(0xFF673695),
+        leading:
+        // ignore: deprecated_member_use
+        FlatButton(
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => Profile()));
+          },
+          child: const Icon(Icons.arrow_back, color: Colors.white),
+        ),
+        title: Text(
+          'Mot de passe changé',
+          style: TextStyle(
+            decoration: TextDecoration.none,
+            color: Colors.white,
+            fontSize: 18,
+            fontFamily: 'verdana',
+          ),
+        ),
+      ),
+      body: Center(
+        child: Column(children: [
+          SizedBox(height: 60),
+          Image.asset('assets/check.png'), //checkk
+          Text(
+            "Mot de passe changé",
+            style: TextStyle(
+              decoration: TextDecoration.none,
+              color: Color(0xFF673695),
+              fontSize: 18,
+              fontFamily: 'verdana',
+            ),
+          ),
         ]),
       ),
     );

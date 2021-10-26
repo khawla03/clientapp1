@@ -114,9 +114,6 @@ class DetailEffect extends StatefulWidget {
 }
 
 class _DetailEffectState extends State<DetailEffect> {
-  DateTime? selectedDate;
-  String display = '';
-  String rdv = "12/10/2021, 10:00";
   double rating = 1;
   @override
   Widget build(BuildContext context) {
@@ -127,8 +124,8 @@ class _DetailEffectState extends State<DetailEffect> {
             // ignore: deprecated_member_use
             FlatButton(
           onPressed: () {
-            /*   Navigator.push(
-                context, MaterialPageRoute(builder: (_) => Livraisons()));*/
+             Navigator.push(
+                context, MaterialPageRoute(builder: (_) => Historique()));
           },
           child: const Icon(Icons.arrow_back, color: Colors.white),
         ),
@@ -151,7 +148,7 @@ class _DetailEffectState extends State<DetailEffect> {
               // itemExtent: 20.0,
               children: [
             Card(
-                color: Colors.white70,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -312,7 +309,7 @@ class _DetailEffectState extends State<DetailEffect> {
               height: 5,
             ),
             Card(
-                color: Colors.white70,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -391,7 +388,7 @@ class _DetailEffectState extends State<DetailEffect> {
               height: 5,
             ),
             Card(
-              color: Colors.white70,
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8),
                 child: Column(children: [
@@ -445,7 +442,7 @@ class _DetailEffectState extends State<DetailEffect> {
               height: 5,
             ),
             Card(
-              color: Colors.white70,
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8),
                 child: Column(children: [
@@ -494,59 +491,69 @@ class _DetailEffectState extends State<DetailEffect> {
             SizedBox(
               height: 5,
             ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, top: 8, bottom: 5),
-                child: Row(
-                  children: [
-                    Text(
-                      "Rendez vous  ",
-                      style: const TextStyle(
-                          fontWeight: FontWeight.bold, fontSize: 18),
-                    ),
-                    Text(
-                      "$rdv",
-                      style: const TextStyle(fontSize: 18),
-                    ),
-                  ],
-                ),
-              ),
-              color: Colors.white70,
-            ),
+
 
             SizedBox(
-              height: 5,
+              height: 15,
             ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.only(left: 8, top: 8, bottom: 5),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Noter la qualité de notre service',
-                        style: TextStyle(
-                          decoration: TextDecoration.none,
-                          color: Colors.black,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          fontFamily: 'verdana',
-                          overflow: TextOverflow.ellipsis,
+
+                SizedBox(
+                  height: 10,
+                ),
+                 Padding(
+                    padding: const EdgeInsets.only(left: 8, top: 8, bottom: 5),
+                    child:
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Container(
+                          height: 45,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF9E9E9E),
+                              borderRadius: BorderRadius.all(Radius.circular(5))),
+                          child: TextButton(
+
+                            onPressed: () => {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) => evaluation())),
+                            },
+                            child: const Text(
+                              'Evaluer',
+                              style: TextStyle(color: Colors.black, fontSize: 16),
+                            ),
+
+                          ),
                         ),
-                      ),
-                    SizedBox(height: 3,),
-                      StarRating(
-                        rating: rating,
-                        onRatingChanged: (rating) =>
-                            setState(() => this.rating = rating),
-                      ),
-                      SizedBox(height: 10),
-                    ]),
-              ),
-              color: Colors.white70,
-            )
-          ]),
+
+
+
+
+                        SizedBox(
+                          width: 20,
+                        ),
+                        Container(
+                          height: 45,
+                          width: 130,
+                          decoration: BoxDecoration(
+                              color: Color(0xFF673695),
+                              borderRadius: BorderRadius.all(Radius.circular(5))),
+                          // ignore: deprecated_member_use
+                          child: FlatButton(
+                            onPressed: () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (_) => Demande()));
+                            },
+                            child: const Text(
+                              "Demande",
+                              style: TextStyle(color: Colors.white, fontSize: 16),
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+              ]),
     );
   }
 }
@@ -559,9 +566,7 @@ class DetailAnnuler extends StatefulWidget {
 }
 
 class _DetailAnnulerState extends State<DetailAnnuler> {
-  DateTime? selectedDate;
-  String display = '';
-  String rdv = "12/10/2021, 10:00";
+
   String annulateur = "Le vendeur";
   double rating = 1;
   @override
@@ -597,7 +602,7 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
         // itemExtent: 20.0,
           children: [
             Card(
-                color: Colors.white70,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -758,7 +763,7 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
               height: 5,
             ),
             Card(
-                color: Colors.white70,
+                color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
                   child: Column(
@@ -837,7 +842,7 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
               height: 5,
             ),
             Card(
-              color: Colors.white70,
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8),
                 child: Column(children: [
@@ -891,7 +896,7 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
               height: 5,
             ),
             Card(
-              color: Colors.white70,
+              color: Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8),
                 child: Column(children: [
@@ -957,14 +962,13 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
                   ],
                 ),
               ),
-              color: Colors.white70,
+              color: Colors.white,
             ),
 
             SizedBox(
-              height: 5,
+              height: 15,
             ),
-           Card(
-              child: Padding(
+            Padding(
                 padding: const EdgeInsets.only(left: 8, top: 8, bottom: 5),
              child:
           Row(
@@ -992,31 +996,10 @@ class _DetailAnnulerState extends State<DetailAnnuler> {
                      
                   
                  
-            
-                        SizedBox(
-                width: 20,
-              ),
-              Container(
-                height: 45,
-                width: 130,
-                decoration: BoxDecoration(
-                    color: Color(0xFF673695),
-                    borderRadius: BorderRadius.all(Radius.circular(5))),
-                // ignore: deprecated_member_use
-                child: FlatButton(
-                  onPressed: () {
-                  Navigator.push(context,
-                                MaterialPageRoute(builder: (_) => Demande()));
-                  },
-                  child: const Text(
-                    "Demande",
-                    style: TextStyle(color: Colors.white, fontSize: 16),
-                  ),
-                ),
-              ),
+
                 ],
                     ),
-                    ), )
+                    ),
           ]),
     );
   }
